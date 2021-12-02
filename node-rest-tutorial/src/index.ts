@@ -1,6 +1,13 @@
 import express from 'express';
+import {createConnection} from "typeorm";
 
 const app = express();
+
+createConnection().then(connection => {
+    app.listen(8080, ()=> {
+        console.log('server is listening 8080');
+    });
+});
 
 //express 버전 4에는 body-parser가 내장되어있다고 했지만
 //json을 파싱하겠다는 설정을 하지 않아서 빈 객체가 온다.
@@ -61,10 +68,5 @@ app.post('/hello6', (req, res) => {
     console.log(req.body);
     const result = req.body;
     res.send(result);
-})
-
-
-app.listen(8080, ()=>{
-    console.log('server is listening 8080');
 })
 
